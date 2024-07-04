@@ -1,0 +1,32 @@
+{
+  "name": "hda-typo3/hda_personen",
+  "type": "typo3-cms-extension",
+  "description": "HDA - person extension",
+  "authors": [
+    {
+      "name": "Michael Lang",
+      "role": "Developer",
+      "email": "michael.lang@h-da.de"
+    }
+  ],
+  "license": ["GPL-2.0-or-later"],
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "hda"
+  ],
+  "autoload": {
+      "psr-4": {
+          "Hda\\HdaPersonen\\": "Classes"
+      }
+  },
+  "require": {
+    "typo3/cms-core": "^11.5",
+    "t3ac/t3up": "^11.0"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "hda_personen"
+    }
+  }
+}
