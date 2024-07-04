@@ -23,7 +23,7 @@
             </p>
         </f:if>
         
-        <f:if condition="{settings.telephone} ||{settings.telephone2} || {settings.fax} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} || {settings.profil} || {settings.www} || {settings.orcid}">
+        <f:if condition="{settings.telephone} ||{settings.telephone2} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} || {settings.profil} || {settings.www} || {settings.orcid}">
         <p class="communication">
             <f:if condition="{settings.telephone}"> 
                 <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
@@ -32,11 +32,6 @@
             </f:if>
             <f:if condition="{settings.telephone2}"> 
                 <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
-            </f:if>
-            <f:if condition="{settings.fax}"> 
-                <f:if condition="{hda:EmptyField(key:'{person.fax}')} != ''"> 
-                    <a href="fax:{person.fax}" class="link-fax">{person.fax}</a><br />
-                </f:if>
             </f:if>
             <f:if condition="{settings.mobil}"> 
                 <f:if condition="{hda:EmptyField(key:'{person.mobil}')} != ''"> 
@@ -107,7 +102,7 @@
             </p>
         </f:if>
         
-        <f:if condition="{settings.telephone} || {settings.telephone2} || {settings.fax} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} ||{settings.profil} || {settings.www} || {settings.orcid}">
+        <f:if condition="{settings.telephone} || {settings.telephone2} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} ||{settings.profil} || {settings.www} || {settings.orcid}">
         <p class="communication mb-2">
             <f:if condition="{settings.telephone}"> 
                 <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
@@ -116,11 +111,6 @@
             </f:if>
             <f:if condition="{settings.telephone2}"> 
                 <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
-            </f:if>
-            <f:if condition="{settings.fax}"> 
-                <f:if condition="{hda:EmptyField(key:'{person.fax}')} != ''"> 
-                    <a href="fax:{person.fax}" class="link-fax">{person.fax}</a><br />
-                </f:if>
             </f:if>
             <f:if condition="{settings.mobil}"> 
                 <f:if condition="{hda:EmptyField(key:'{person.mobil}')} != ''"> 
@@ -197,11 +187,6 @@
             </f:if>
             <f:if condition="{settings.telephone2}"> 
                 <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
-            </f:if>
-            <f:if condition="{settings.fax}"> 
-                <f:if condition="{hda:EmptyField(key:'{person.0.fax}')} != ''"> 
-                    <a href="fax:{person.0.fax}" class="link-fax">{person.0.fax}</a><br />
-                </f:if>
             </f:if>
             <f:if condition="{settings.mobil}"> 
                 <f:if condition="{hda:EmptyField(key:'{person.0.mobil}')} != ''"> 
