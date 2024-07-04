@@ -1,0 +1,8 @@
+# Die Templates für den Personendarstellung *******************************************
+
+tx_hdapersonen.templateLayouts{
+        List 				= LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:list
+        Compact     		= LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:compact
+        Profil              = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:profilview    
+}
+
