@@ -1,0 +1,137 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true"
+      xmlns:hda="http://typo3.org/ns/Hda/HdaPersonen/ViewHelpers">
+
+    <f:layout name="Standard" />
+    <f:section name="Content">
+
+		<div class="list">
+			<f:form action="index" class="form-horizontal " method="post" object="{searchForm}" name="searchForm">
+			
+				<f:if condition="{settings.search}">
+				    <div class="form-group d-flex align-items-center mb-2">
+					    
+				            <label class="control-label w-auto">
+				                <f:translate key='LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:search'/>
+				                </label>
+				            <div class="col-4 px-2">
+				                <f:form.textfield class="form-control" property="searchWord" id="search"/>
+				            </div>
+			
+				            <div class="col w-auto px-0">
+				                <f:form.submit class="btn btn-secondary" value="{f:translate(key: 'LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:submit')}"/>
+				                <f:link.page pageUid="{data.uid}" class="btn btn-secondary ml-1 ms-1" title="zurücksetzen">
+				                    <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:reset"/>
+				                </f:link.page>
+				          
+				            </div>		             
+				    </div>
+			    </f:if>
+			    
+				<f:if condition="{settings.pagination} > 1">
+		          <ul class="f3-widget-paginator">
+		                <li class="w-auto p-0">
+				               	<f:link.page pageUid="{data.uid}" title="zurücksetzen" class="h-100 d-block pt-2" >
+				                    <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:all"/>
+			                	</f:link.page>  
+					   </li>          
+		              <f:for each="{firstChars}" key="charKey" as="char">
+		            
+		               <li class="w-auto p-0">
+		                   <label for="char-{charKey}" class="abcfilter page-link d-block {f:if(condition:'{char} == {searchForm.firstChar}',then:'active')}">
+		                       <f:form.radio class="btn form-control" additionalAttributes="{onclick:'this.form.submit()'}" property="firstChar" value="{char}" id="char-{charKey}" style="display: none;"/>{char}</label>
+						</li>
+		              </f:for>
+		           </ul>   
+		       </f:if>
+			</f:form>
+		
+		    <f:for each="{pagination.paginator.paginatedItems}" as="person" iteration="iterator">
+				<f:render section="list" arguments="{_all}"/>
+		    </f:for>
+		    
+			<f:if condition="{settings.pagination} > 0">
+				<f:render partial="Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, search: search, actionName: 'index'}"/>
+	        </f:if>
+	
+		</div> 
+	
+	</f:section>
+			
+	<f:section name="list">
+		<f:if condition="{settings.imageformatlist} == 'normal'">
+			<div class="innerframe w-100 d-flex">
+	
+				<div class="persarea col-4">
+					<f:render partial="Salutation.html" arguments="{person: person,settings:settings,iterator:iterator}" /><br />				
+					<f:render partial="Information.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />				
+				</div>
+				<div class="infoarea col-4">
+					<f:render partial="Contact.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />	
+				</div>		
+				<div class="imageframe format-normal col-4 border{settings.imageborder}">
+					<f:if condition="{settings.image} !=''">
+					   <f:format.raw>
+					   	  <hda:Image key="{person.imageref}" name="{person.name}"  settings="{settings}" />
+					   </f:format.raw> 
+					</f:if>
+				</div>			
+			</div>					 
+		</f:if>
+		
+		<f:if condition="{settings.imageformatlist} == 'portrait'">
+			<div class="innerframe w-100 d-flex">
+	
+				<div class="persarea col-4">
+					<f:render partial="Salutation.html" arguments="{person: person,settings:settings,iterator:iterator}" /><br />					
+					<f:render partial="Information.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />				
+				</div>
+				<div class="infoarea col-4">
+					<f:render partial="Contact.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />	
+				</div>		
+				<div class="imageframe format-portrait col-3 offset-1 border{settings.imageborder} {settings.image}">
+					<f:if condition="{settings.image} !=''">
+					   <f:format.raw>
+					   	  <hda:Image key="{person.imageref}" name="{person.name}"  settings="{settings}" />
+					   </f:format.raw> 
+					</f:if>
+				</div>	
+			</div>		
+		</f:if>
+		
+		<f:if condition="{settings.imageformatlist} == 'fixed'">
+			<div class="innerframe w-100 d-flex">
+	
+				<div class="persarea col-4">
+					<f:render partial="Salutation.html" arguments="{person: person,settings:settings,iterator:iterator}" /><br />					
+					<f:render partial="Information.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />				
+				</div>
+				<div class="infoarea col-4 ">
+					<f:render partial="Contact.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />	
+				</div>		
+				<div class="imageframe format-square col-3 offset-1 border{settings.imageborder}">
+					<f:if condition="{settings.image} !=''">
+					   <f:format.raw>
+					   	  <hda:Image key="{person.imageref}" name="{person.name}"  settings="{settings}" />
+					   </f:format.raw> 
+					</f:if>
+				</div>	
+			</div>		
+		</f:if>
+		<f:if condition="{settings.imageformatlist} == 'none'">
+			<div class="innerframe w-100 d-flex">
+	
+				<div class="persarea col-5">
+					<f:render partial="Salutation.html" arguments="{person: person,settings:settings,iterator:iterator}" /><br />					
+					<f:render partial="Information.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />				
+				</div>
+				<div class="infoarea col-7">
+					<f:render partial="Contact.html" section="list" arguments="{person: person,settings:settings,iterator:iterator}" />	
+				</div>		
+			</div>		
+		</f:if>
+	</f:section>
+
+</html>
+
+
+

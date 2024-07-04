@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="fr" datatype="plaintext" original="messages" date="2014-09-22T11:44:12Z" product-name="hda_personen">
+		<header/>
+		<body>
+		 
+            <trans-unit id="educationalarea.1">
+                <source>Educational Area</source>
+                <target state="translated">Domaine d'enseignement</target>
+            </trans-unit>  
+			<trans-unit id="educationalarea.2">
+                <source>Workspace</source>
+                <target state="translated">Espace de travail</target>
+            </trans-unit>               
+            <trans-unit id="educationalarea.3">
+                <source>Area of responsibility</source>
+                <target state="translated">Domaine d'activit</target>
+            </trans-unit>
+		</body>		
+	</file>
+</xliff>			

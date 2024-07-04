@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" date="2021-11-04T13:09:36Z" product-name="hda_personen">
+        <header/>
+        <body>
+			<trans-unit id="sheet_person">
+				<source>Select person</source>
+				<target state="translated">Personenauswahl</target>
+			</trans-unit>	
+		
+			<trans-unit id="startingpoint">
+				<source>Startingpoint</source>
+				<target state="translated">Ausgangspunkt</target>				
+			</trans-unit>	
+		
+			<trans-unit id="person">
+				<source>Individual selection</source>
+				<target state="translated">Direkte Personenauswahl (überstimmt alles darüber gewählte)</target>
+			</trans-unit>				
+			<trans-unit id="employed">
+				<source>Usergroups</source>
+				<target state="translated">Beschäftigungsgruppen auswählen</target>
+			</trans-unit>						
+			<trans-unit id="sort">
+				<source>Sorting of the individual selection</source>
+				<target state="translated">Auswahl alphabetisch sortieren (betrifft nur die direkte Personenauswahl)</target>
+			</trans-unit>					
+		
+			<trans-unit id="sheet_personaldata">
+				<source>Display personal data</source>
+				<target state="translated">Personendaten</target>
+			</trans-unit>				
+			<trans-unit id="salutation">
+				<source>Salutation</source>
+				<target state="translated">Anrede </target>
+			</trans-unit>	
+			<trans-unit id="degree">
+				<source>Degree</source>
+				<target state="translated">Akademischer Grad</target>
+			</trans-unit>			
+			<trans-unit id="department">
+				<source>Department</source>
+				<target state="translated">Abteilung/Fachbereich</target>
+			</trans-unit>							
+			<trans-unit id="roles">
+				<source>Roles</source>
+				<target state="translated">Rollen</target>
+			</trans-unit>							
+			<trans-unit id="employed">
+				<source>Employed</source>
+				<target state="translated">Beschäftigungsverhältnis</target>
+			</trans-unit>							
+			<trans-unit id="consultation">
+				<source>Consultation</source>
+				<target state="translated">Sprechzeiten (aus dem LDAP)</target>
+			</trans-unit>				
+			<trans-unit id="profilview">
+				<source>Show the profil</source>
+				<target state="translated">Profildaten aus dem LDAP anzeigen</target>
+			</trans-unit>	
+
+            <trans-unit id="educationalarea">
+                <source>Activities</source>
+                <target state="translated">Titel Arbeits-/Tätigkeitsbereich/Lehrgebiet</target>
+            </trans-unit>   
+            <trans-unit id="educationalarea.0">
+                <source>-</source>
+                <target state="translated">keine Anzeige</target>
+            </trans-unit> 
+            <trans-unit id="educationalarea.1">
+                <source>Educational Area</source>
+                <target state="translated">Lehrgebiet</target>
+            </trans-unit>   
+            <trans-unit id="educationalarea.2">
+                <source>Workspace</source>
+                <target state="translated">Arbeitsbereich</target>
+            </trans-unit>               
+            <trans-unit id="educationalarea.3">
+                <source>Area of responsibility</source>
+                <target state="translated">Aufgabengebiet</target>
+            </trans-unit>
+            			
+			<trans-unit id="profil">
+				<source>Profil</source>
+				<target state="translated">Profilseite anzeigen. Die Seite muss im Navigationstitel (nav_title) dem Wert der E-Mail-Adresse entsprechen 'vorname nachname', aber ein Leerzeichen statt des Punkts.</target>				
+			</trans-unit>							
+			<trans-unit id="noname">
+				<source>Hide the name in the frontend (only in Singleview)</source>
+				<target state="translated">Den Namen verstecken</target>	
+			</trans-unit>	
+			<trans-unit id="subtitle">
+				<source>Subtitle (only in Singleview)</source>
+				<target state="translated">Zusatzinformation</target>
+			</trans-unit>	
+			
+			<trans-unit id="sheet_contactdata">
+				<source>Contact data</source>
+				<target state="translated">Kontaktdaten</target>
+			</trans-unit>			
+
+			<trans-unit id="zipcity">
+				<source>Zip / city</source>
+				<target state="translated">PLZ / Stadt</target>
+			</trans-unit>			
+			<trans-unit id="address">
+				<source>Address</source>
+				<target state="translated">Straße</target>
+			</trans-unit>	
+			<trans-unit id="office">
+				<source>Office</source>
+				<target state="translated">Büro</target>
+			</trans-unit>	
+			<trans-unit id="telephone">
+				<source>Telephone</source>
+				<target state="translated">Telefon</target>
+			</trans-unit>
+			<trans-unit id="telephone2">
+				<source>Other Telephone</source>
+				<target state="translated">Alternatives Telefon</target>
+			</trans-unit>
+			<trans-unit id="fax">
+				<source>Fax</source>
+				<target state="translated">Fax</target>
+			</trans-unit>	
+			<trans-unit id="mobil">
+				<source>Mobil</source>
+				<target state="translated">Mobil</target>
+			</trans-unit>		
+			<trans-unit id="www">
+				<source>Website</source>
+				<target state="translated">Webseite - wie im LDAP hinterlegt</target>
+			</trans-unit>						
+			<trans-unit id="email">
+				<source>Email</source>
+				<target state="translated">E-Mail</target>
+			</trans-unit>	
+			<trans-unit id="ownemail">
+				<source>Own E-Mail address (only in Singleview)</source>
+				<target state="translated">Eigene E-Mail</target>
+			</trans-unit>
+			<trans-unit id="orcid">
+				<source>ORCID</source>
+				<target state="translated">ORCID</target>
+			</trans-unit>				
+			<trans-unit id="image">
+				<source>Image</source>
+				<target state="translated">Bildreferenz (Bild muss freigegeben sein, public)</target>
+			</trans-unit>				
+			<trans-unit id="emailformat.none">
+				<source>-</source>
+				<target state="translated">keine E-Mail Adresse anzeigen</target>
+			</trans-unit>								
+			<trans-unit id="emailformat.classical">
+				<source>Classical</source>
+				<target state="translated">Klassisches Format</target>
+			</trans-unit>				
+			<trans-unit id="emailformat.name">
+				<source>Only name</source>
+				<target state="translated">Nur Name</target>
+			</trans-unit>				
+			<trans-unit id="emailformat.mailsymbol">
+				<source>Only word E-Mail</source>
+				<target state="translated">Nur das Wort E-Mail</target>
+			</trans-unit>	
+
+			<trans-unit id="sheet_display">
+				<source>Display</source>
+				<target state="translated">Darstellung</target>
+			</trans-unit>	
+			<trans-unit id="templates">
+				<source>Templates</source>
+				<target state="translated">Templateauswahl</target>
+			</trans-unit>			
+			<trans-unit id="pagination">
+				<source>Pagination</source>
+				<target state="translated">Seitenpaginierung</target>
+			</trans-unit>		
+			<trans-unit id="pagination.0">
+				<source>no</source>
+				<target state="translated">keine anzeigen</target>
+			</trans-unit>		
+			<trans-unit id="pagination.1">
+				<source>yes</source>
+				<target state="translated">anzeigen</target>
+			</trans-unit>	
+			<trans-unit id="pagination.2">
+				<source>abc</source>
+				<target state="translated">alphabetisch sortiert</target>
+			</trans-unit>	
+
+
+			<trans-unit id="imageformat">
+				<source>Imageformat</source>
+				<target state="translated">Bilddarstellung</target>
+			</trans-unit>		
+			<trans-unit id="imageformat.1">
+				<source>normal</source>
+				<target state="translated">normal 4:3</target>
+			</trans-unit>			
+			<trans-unit id="imageformat.2">
+				<source>wide</source>
+				<target state="translated">breit 16:9</target>
+			</trans-unit>			
+			<trans-unit id="imageformat.3">
+				<source>portrait</source>
+				<target state="translated">Porträt 4:5</target>
+			</trans-unit>		
+			<trans-unit id="imageformat.4">
+				<source>square</source>
+				<target state="translated">quadratisch</target>
+			</trans-unit>	
+			<trans-unit id="imageformat.5">
+				<source>fixed</source>
+				<target state="translated">Feste Größe</target>
+			</trans-unit>				
+			
+			<trans-unit id="search">
+				<source>Show searchfield</source>
+				<target state="translated">Suche anzeigen</target>
+			</trans-unit>	
+
+			<trans-unit id="items">
+				<source>Items</source>
+				<target state="translated">Anzahl, der angezeigten Datensätze.</target>
+			</trans-unit>		
+			<trans-unit id="itemsperpage">
+				<source>ItemPerPage</source>
+				<target state="translated">Anzahl, der angezeigten Datensätze.</target>
+			</trans-unit>					
+			<trans-unit id="maximumLinks">
+				<source>Max. links</source>
+				<target state="translated">Max. Anzahl, der Links.</target>
+			</trans-unit>	
+				
+			<trans-unit id="show">
+				<source>show/hide</source>
+				<target state="translated">zeigen/verstecken</target>
+			</trans-unit>	
+
+		</body>		
+	</file>
+</xliff>			

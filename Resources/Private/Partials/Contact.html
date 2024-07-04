@@ -1,0 +1,231 @@
+ <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/fluid/ViewHelpers"
+     xmlns:hda="http://typo3.org/ns/Hda/HdaPersonen/ViewHelpers">
+
+    <f:section name="list">  
+         <f:if condition="{settings.address} || {settings.zip} || {settings.office}">
+            <p class="address"><span class="d-none d-md-inlineblock communication"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:communication" /></span>
+                <f:if condition="{settings.address}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.address}')} != ''">
+                        {person.address}<br />
+                    </f:if>
+                </f:if>
+                <f:if condition="{settings.zip}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.zip}')} != ''"> 
+                        {person.zip} {person.city}<br />
+                    </f:if>
+                </f:if>
+                <f:if condition="{settings.office}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.office}')} != ''"> 
+                        <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:office" />: {person.office}
+                    </f:if>
+                </f:if>
+            </p>
+        </f:if>
+        
+        <f:if condition="{settings.telephone} ||{settings.telephone2} || {settings.fax} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} || {settings.profil} || {settings.www} || {settings.orcid}">
+        <p class="communication">
+            <f:if condition="{settings.telephone}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
+                   <a href="tel:{person.telephone}" class="link-phone">{person.telephone}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.telephone2}"> 
+                <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
+            </f:if>
+            <f:if condition="{settings.fax}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.fax}')} != ''"> 
+                    <a href="fax:{person.fax}" class="link-fax">{person.fax}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.mobil}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.mobil}')} != ''"> 
+                     <a href="tel:{person.mobil}" class="link-mobil">{person.mobil}</a><br />
+                </f:if>
+            </f:if>
+  
+            <f:if condition="{settings.emailformat} > 0">
+                <f:if condition="{hda:EmptyField(key:'{person.email}')} != ''">
+                    <f:if condition="{settings.emailformat} == 1"> 
+                        <f:link.email class="link-mail" email="{person.email}" /><br />
+                    </f:if> 
+                    <f:if condition="{settings.emailformat} == 2"> 
+           				<f:if condition="{person.employed} != 'Funktionsaccount'">	
+           					<f:then><f:link.email class="link-mail" email="{person.email}">{person.firstName} {person.lastName}</f:link.email><br /></f:then>
+           					<f:else><f:link.email class="link-mail" email="{person.email}">{person.name}</f:link.email><br /></f:else>
+	             		</f:if>
+                    </f:if> 
+                    <f:if condition="{settings.emailformat} == 3"> 
+                        <f:link.email class="link-mail" email="{person.email}">E-Mail</f:link.email><br /> 
+                    </f:if>                
+                </f:if> 
+            </f:if>      
+            
+            <f:if condition="{settings.ownemail}">
+                 <f:link.email class="link-mail" email="{settings.ownemail}">{settings.ownemail}</f:link.email><br />
+            </f:if> 
+            
+            <f:if condition="{settings.profil}">
+                <f:if condition="{hda:Personalpage(key:'{person.email}')} != ''">
+                	<f:link.page pageUid="{hda:Personalpage(key:'{person.email}')}" class="link-internal"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:profil" /></f:link.page><br />
+				</f:if>
+            </f:if>
+            
+            <f:if condition="{settings.www}">
+               <f:if condition="{hda:Website(www:'{person.www}')}">
+                   <f:link.external class="link-web" uri="{person.www}" target="_blank"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:ownsite" /></f:link.external><br />
+               </f:if> 
+             </f:if>  
+
+            <f:if condition="{settings.orcid}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.orcid}')} != ''"> 
+                    <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:orcid" />: <f:link.external uri="https://orcid.org/{person.orcid}" target="_blank">{person.orcid}</f:link.external><br />
+                </f:if>
+            </f:if>
+        </p>
+        </f:if>
+     </f:section> 
+     
+    <f:section name="single"> 
+         <f:if condition="{settings.address} || {settings.zip} || {settings.office}">
+            <p class="address mb-2"><span class="d-none d-md-inlineblock communication"><strong><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:communication" /></strong><br /></span>
+                <f:if condition="{settings.address}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.address}')} != ''">
+                        {person.address}<br />
+                    </f:if>
+                </f:if>
+                <f:if condition="{settings.zip}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.zip}')} != ''"> 
+                        {person.zip} {person.city}<br />
+                    </f:if>
+                </f:if>
+                <f:if condition="{settings.office}"> 
+                    <f:if condition="{hda:EmptyField(key:'{person.office}')} != ''"> 
+                        <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:office" />: {person.office}
+                    </f:if>
+                </f:if>
+            </p>
+        </f:if>
+        
+        <f:if condition="{settings.telephone} || {settings.telephone2} || {settings.fax} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} ||{settings.profil} || {settings.www} || {settings.orcid}">
+        <p class="communication mb-2">
+            <f:if condition="{settings.telephone}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
+                   <a href="tel:{person.telephone}" class="link-phone">{person.telephone}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.telephone2}"> 
+                <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
+            </f:if>
+            <f:if condition="{settings.fax}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.fax}')} != ''"> 
+                    <a href="fax:{person.fax}" class="link-fax">{person.fax}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.mobil}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.mobil}')} != ''"> 
+                     <a href="tel:{person.mobil}" class="link-mobil">{person.mobil}</a><br />
+                </f:if>
+            </f:if>
+            
+            <f:if condition="{settings.emailformat} > 0">
+                <f:if condition="{hda:EmptyField(key:'{person.email}')} != ''">
+                    <f:if condition="{settings.emailformat} == 1"> 
+                        <f:link.email class="link-mail" email="{person.email}" /><br />
+                    </f:if> 
+                    <f:if condition="{settings.emailformat} == 2"> 
+                        <f:link.email class="link-mail" email="{person.email}">{person.firstName} {person.lastName}</f:link.email><br /> 
+                    </f:if> 
+                    <f:if condition="{settings.emailformat} == 3"> 
+                        <f:link.email class="link-mail" email="{person.email}">E-Mail</f:link.email><br /> 
+                    </f:if>                
+                </f:if> 
+            </f:if>        
+
+            <f:if condition="{settings.ownemail}">
+                 <f:link.email class="link-mail" email="{settings.ownemail}">{settings.ownemail}</f:link.email><br />
+            </f:if> 
+
+            
+            <f:if condition="{settings.profil}">
+                <f:if condition="{hda:Personalpage(key:'{person.email}')} != ''">
+                    <f:link.page pageUid="{hda:Personalpage(key:'{person.email}')}" class="link-internal"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:profil" /></f:link.page><br />
+                </f:if>
+            </f:if>
+            
+            <f:if condition="{settings.www}">
+               <f:if condition="{hda:Website(www:'{person.www}')}">
+                   <f:link.external class="link-web" uri="{person.www}" target="_blank"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:ownsite" /></f:link.external>
+               </f:if> 
+             </f:if>  
+
+            <f:if condition="{settings.orcid}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.orcid}')} != ''"> 
+                    <p><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:orcid" />: <f:link.external uri="https://orcid.org/{person.orcid}" target="_blank">{person.orcid}</f:link.external></p>
+                </f:if>
+            </f:if>
+        </p>
+        </f:if>
+     </f:section>  
+     
+     
+    <f:section name="profil">
+    <!-- single -->
+        <p><span class="d-none d-md-inlineblock communication"><strong ><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:communication" /></strong><br /></span>
+            <f:if condition="{settings.address}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.address}')} != ''">
+                    {person.0.address}<br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.zip}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.zip}')} != ''"> 
+                    {person.0.zip} {person.0.city}<br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.office}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.office}')} != ''"> 
+                    <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:office" />: {person.0.office}
+                </f:if>
+            </f:if>
+        </p>
+        
+        <p>
+            <f:if condition="{settings.telephone}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.telephone}')} != ''">
+                   <a href="tel:{person.0.telephone}" class="link-phone">{person.0.telephone}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.telephone2}"> 
+                <a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a><br />
+            </f:if>
+            <f:if condition="{settings.fax}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.fax}')} != ''"> 
+                    <a href="fax:{person.0.fax}" class="link-fax">{person.0.fax}</a><br />
+                </f:if>
+            </f:if>
+            <f:if condition="{settings.mobil}"> 
+                <f:if condition="{hda:EmptyField(key:'{person.0.mobil}')} != ''"> 
+                     <a href="tel:{person.0.mobil}" class="link-mobil">{person.0.mobil}</a><br />
+                </f:if>
+            </f:if>
+            
+            <f:if condition="{settings.ownemail}">
+                 <f:link.email class="link-mail" email="{settings.ownemail}">{settings.ownemail}</f:link.email><br />
+            </f:if> 
+
+           <f:if condition="{settings.www}">
+              <f:if condition="{hda:Website(www:'{person.0.www}')}">
+                  <f:link.external class="link-web" uri="{person.0.www}" target="_blank"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:ownsite" /></f:link.external><br /> 
+              </f:if> 
+            </f:if>  
+
+           <f:if condition="{settings.orcid}"> 
+               <f:if condition="{hda:EmptyField(key:'{person.0.orcid}')} != ''"> 
+               <f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:orcid" />: <f:link.external uri="https://orcid.org/{person.orcid}" target="_blank">{person.0.orcid}</f:link.external>
+               </f:if>
+           </f:if>
+                
+        </p>
+    </f:section> 
+      
+</html>
