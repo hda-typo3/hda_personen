@@ -1,0 +1,42 @@
+config.tx_extbase {
+    view {
+        templateRootPath 		= {$plugin.tx_hdapersonen.view.templateRootPath}
+    }
+    persistence {
+        storagePid =  {$plugin.tx_hdapersonen.persistence.storagePid}
+        recursive =   {$plugin.tx_hdapersonen.persistence.recursive}
+        /*
+        classes {
+            Hda\HdaPersonen\Domain\Model\Person {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_Extbase_Domain_Model_FrontendUser
+                    columns {
+                        # <field_in Database>.mapOnProperty = <Name_Property_in_Model>
+                        employed.mapOnProperty = employed
+                        roles.mapOnProperty = roles
+                        consultation.mapOnProperty = consultation
+                        profil.mapOnProperty = profil
+                        educationalarea.mapOnProperty = educationalarea
+                        salutation.mapOnProperty = salutation
+                        office.mapOnProperty = office
+                        mobil.mapOnProperty = mobil
+                        orcid.mapOnProperty = orcid 
+                    }
+                }
+            }
+
+            Hda\HdaPersonen\Domain\Model\Page {
+                mapping {
+                    tableName = pages
+                    recordType =
+                    columns {
+                        nav_title.mapOnProperty = navtitle
+                        subtitle.mapOnProperty = subtitle
+                    }
+                }
+            }
+        }
+        */
+    }
+}
