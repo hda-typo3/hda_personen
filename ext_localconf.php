@@ -16,18 +16,20 @@ call_user_func(static function () {
             \Hda\HdaPersonen\Controller\PersonController::class => 'index'
         ]
     );
-
+    
+    /* ==  Add TSconfig ============================================ */
+    
+    ExtensionManagementUtility::addTypoScriptSetup("@import 'EXT:hda_personen/Configuration/TypoScript/Mapping.typoscript'");
     ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Page/Mod/Wizards/NewContentElement.tsconfig'");
-    ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Mapping.tsconfig'");
     ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Templates.tsconfig'");
-
-    /* ==  register icons  ========================================= */
-     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-        
-     $iconRegistry->registerIcon(
-            'hda_personen',
-            \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-            ['source' => 'EXT:hda_personen/Resources/Public/Icons/hdaPersonen.svg']
-     );  
-             
+   
+     /* ==  register icons  ========================================= */
+	$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+	
+	$iconRegistry->registerIcon(
+	    'hda_personen',
+	    \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+	    ['source' => 'EXT:hda_personen/Resources/Public/Icons/hdaPersonen.svg']
+	    );
+	
 });
