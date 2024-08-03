@@ -11,8 +11,6 @@
   ],
   "license": ["GPL-2.0-or-later"],
   "keywords": [
-    "TYPO3",
-    "extension",
     "hda"
   ],
   "autoload": {
