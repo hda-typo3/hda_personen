@@ -12,116 +12,116 @@
 		display: none;
 	}
 
-	.imageframe {					overflow: hidden; display: flex;  justify-content: center;  align-items: center;
-		img							{width: 100%; height: auto;object-fit: cover; min-height: 100%;  }	
+	.imageframe {						overflow: hidden; display: flex; justify-content: center; align-items: center;
+		img						{width: 100%; height: auto;object-fit: cover; min-height: 100%;}	
 	}		
-	.imageframe.format-wide {		aspect-ratio: 16 / 9;
+	.imageframe.format-wide {				aspect-ratio: 16 / 9;
 		img							{}	
 	}
-	.imageframe.format-normal{		aspect-ratio: 4 / 3;
+	.imageframe.format-normal{				aspect-ratio: 4 / 3;
 		img							{}	
 	}
-    .imageframe.format-portrait{	aspect-ratio: 4 / 5;  
-		img							{width: auto; height: 100%; min-width: 100%; max-width: inherit;}	
+	.imageframe.format-portrait{				aspect-ratio: 4 / 5; 
+		img						{width: auto; height: 100%; min-width: 100%; max-width: inherit;}	
 	}
-    .imageframe.format-square{	    aspect-ratio: 1 / 1;  
-		img							{width: auto; height: 100%; min-width: 100%; max-width: inherit;}	
+	.imageframe.format-square{				aspect-ratio: 1 / 1; 
+		img						{width: auto; height: 100%; min-width: 100%; max-width: inherit;}	
 	}		
-	.imageframe.border2				{padding: 1vw;}     
+	.imageframe.border2					{padding: 1vw;}	
 
-	span.person							  {font-size: 110%; display: inline-block; margin-bottom: .5rem; font-weight: 600;}
+	span.person						{font-size: 110%; display: inline-block; margin-bottom: $v2; font-weight: 600;}
 
 
-	&.frame-whiteline .compact .col-12 .innerframe 	{border: 1px solid rgba(0,0,0,.2); border-top: 0; background: #ffffffcc; transition: all ease .3s; margin: 0 -1px;}	
-	&.frame-whiteline .compact .col-12 .innerframe:hover   {background: #ffffffff;}		
+	&.frame-whiteline .compact .col-12 .innerframe 		{border: 1px solid rgba($black,.2); border-top: 0; background: #ffffffcc; transition: all ease .3s; margin: 0 -1px;}	
+	&.frame-whiteline .compact .col-12 .innerframe:hover	{background: #ffffffff;}		
 	
-	&.frame-white .compact .col-12 .innerframe     	{background: #ffffffcc; transition: all ease .3s;}
-	&.frame-white .compact .col-12 .innerframe:hover                    {background: #ffffffff;}			 	
+	&.frame-white .compact .col-12 .innerframe		{background: #ffffffcc; transition: all ease .3s;}
+	&.frame-white .compact .col-12 .innerframe:hover	{background: #ffffffff;}				
 		
-	&.frame-line .compact .col-12 .innerframe      	{border: 1px solid rgba(0,0,0,.2); border-top: 0;}
-	&.frame-line .compact .col-12 .imageframe      	{margin: 0 -1px;}	
+	&.frame-line .compact .col-12 .innerframe		{border: 1px solid rgba($black,.2); border-top: 0;}
+	&.frame-line .compact .col-12 .imageframe		{margin: 0 -1px;}	
 		
-	&.frame-grey .compact .col-12 .innerframe      	{background: #efefef;}	
+	&.frame-grey .compact .col-12 .innerframe		{background: #efefef;}	
 	
 
-	&.frame-line .list  .innerframe     			{border: 1px solid rgba(0,0,0,.2); margin-bottom: .75rem;}
+	&.frame-line .list  .innerframe				{border: 1px solid rgba($black,.2); margin-bottom: $v3;}
 	
 
 			
 	.compact{
-		.col-12                         	{margin-bottom: .5rem;}
-		.col-12 p       					{padding: 0 0 .5rem 0; margin: 0;}
-		.col-12 ul      					{padding-bottom: .66rem;}
+		.col-12						{margin-bottom: $v2;}
+		.col-12 p					{padding: 0 0 $v2 0; margin: 0;}
+		.col-12 ul					{padding-bottom: §3v;}
 		
 		
-		&.oneitem > div						{border-bottom: 1px solid #ccc;}
-		&.oneitem > div:last-of-type		{border-bottom: 0px solid #ccc; margin: 0;}		
+		&.oneitem > div					{border-bottom: 1px solid $grey;}
+		&.oneitem > div:last-of-type			{border-bottom: 0px solid $grey; margin: 0;}		
 	}		
-    .compact .white .col-12 .infoarea    	{padding: .5rem .75rem 0; }	
+	.compact .white .col-12 .infoarea			{padding: $v2 $v3 0;}	
 
 	
 	.list{
-		.persarea                            {padding: .75rem .5rem .75rem .75rem;}
-		.infoarea                            {padding: .75rem .5rem .75rem .5rem;}
+		.persarea					{padding: $v3 $v2 $v3 $v3;}
+		.infoarea					{padding: $v3 $v2 $v3 $v2;}
 		
-		.format-portrait .col-3              {width: 20%;}
-		.format-portrait .col-4              {width: 40%;}
+		.format-portrait .col-3				{width: 20%;}
+		.format-portrait .col-4				{width: 40%;}
 		
-		.innerframe                          {background: #ffffffcc; margin-bottom: .66rem; transition: all ease .3s;}	
-		.innerframe:hover                    {background: #ffffffff;}			
+		.innerframe					{background: #ffffffcc; margin-bottom: §3v; transition: all ease .3s;}	
+		.innerframe:hover				{background: #ffffffff;}			
 		
-		.f3-widget-paginator li              {cursor: pointer;}		
-		.f3-widget-paginator .active         {background: $baseColor; color: #fff}
-		.f3-widget-paginator .active  a      {color: #fff; background: $baseColor;}		
-		.f3-widget-paginator .active         {background: $baseColor;}
+		.f3-widget-paginator li				{cursor: pointer;}		
+		.f3-widget-paginator .active			{background: $baseColor; color: $white;}
+		.f3-widget-paginator .active  a			{color: $white; background: $baseColor;}		
+		.f3-widget-paginator .active			{background: $baseColor;}
 		
-		.abcfilter                           {text-transform: uppercase ;}
-		form a.btn                           {font-weight: normal;}
+		.abcfilter					{text-transform: uppercase ;}
+		form a.btn					{font-weight: normal;}
 
 	}
 
 }
 
-.contentRight .compact.oneitem .infoarea    {padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.75rem;}
+.contentRight .compact.oneitem .infoarea			{padding-left: $v3; padding-right: $v3; padding-top: $v3;}
 
 
 .frame-contact { 
-	  > h2:first-of-type,
-	  > h3:first-of-type,  
-	  > h4:first-of-type                     {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($textColor,.85); font-weight: 600; }	
-	  
-	  > h2:first-of-type a,
-	  > h3:first-of-type a,
-	  > h4:first-of-type a                              {color: #fff  !important;}
-	  
+	> h2:first-of-type,
+	> h3:first-of-type,  
+	> h4:first-of-type					{padding: $v2 $v3; text-transform: uppercase; letter-spacing: .01rem; margin: 0; color: $white !important; background: rgba($textColor,.85); font-weight: 600;}	
+	
+	> h2:first-of-type a,
+	> h3:first-of-type a,
+	> h4:first-of-type a					{color: $white !important;}
+	
 }
 
-.frame-text.frame-contact > div            {padding: .5rem .75rem; background: #fff;}
+.frame-text.frame-contact > div					{padding: $v2 $v3; background: $white;}
 
 .frame-shortcut.frame-contact{
-	> *                                     {padding: 0;}
+	> *							{padding: 0;}
 	> *	> h2,	
 	> *	> h3,
-	> *	> h4                                {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($textColor,.85); font-weight: 600; }	
+	> *	> h4						{padding: $v2 $v3; text-transform: uppercase; letter-spacing: .01rem; margin: 0; color: $white !important; background: rgba($textColor,.85); font-weight: 600;}	
 	
-	  
+	
 	> * > h2:first-of-type a,
 	> * > h3:first-of-type a,
-	> * > h4:first-of-type a                {color: #fff  !important;}
+	> * > h4:first-of-type a				{color: $white !important;}
 }
 
 
-.frame-contact .frame-contact {    
-     h2, h3, h4                                         {padding-left: 0 !important; padding-right: 0 !important; background: none!important; color: inherit !important; color: $textColor;}  
-   }
+.frame-contact .frame-contact {	
+	h2, h3, h4						{padding-left: 0 !important; padding-right: 0 !important; background: none!important; color: inherit !important; color: $textColor;}  
+  }
 
 
 
 
 html[color-mode$=dark] {
-	main .hdaPersonenList .listElement         {background: none  !important;}
+	main .hdaPersonenList .listElement			{background: none  !important;}
 	main .frame-newsHeader,
 	main .frame-type-table.frame-white table, 
-	main .frame-white        					{background: none  !important;}
+	main .frame-white					{background: none  !important;}
 
 }
