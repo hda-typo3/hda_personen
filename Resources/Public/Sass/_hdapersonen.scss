@@ -88,7 +88,7 @@
 .frame-contact { 
 	  > h2:first-of-type,
 	  > h3:first-of-type,  
-	  > h4:first-of-type                     {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($baseTextColor,.85); font-weight: 600; }	
+	  > h4:first-of-type                     {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($textColor,.85); font-weight: 600; }	
 	  
 	  > h2:first-of-type a,
 	  > h3:first-of-type a,
@@ -102,7 +102,7 @@
 	> *                                     {padding: 0;}
 	> *	> h2,	
 	> *	> h3,
-	> *	> h4                                {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($baseTextColor,.85); font-weight: 600; }	
+	> *	> h4                                {padding: .5rem .75rem;   text-transform: uppercase; letter-spacing: .01rem;  margin: 0;  color: #fff!important;    background: rgba($textColor,.85); font-weight: 600; }	
 	
 	  
 	> * > h2:first-of-type a,
@@ -112,7 +112,7 @@
 
 
 .frame-contact .frame-contact {    
-     h2, h3, h4                                         {padding-left: 0 !important; padding-right: 0 !important; background: none!important; color: inherit !important; color: $baseTextColor;}  
+     h2, h3, h4                                         {padding-left: 0 !important; padding-right: 0 !important; background: none!important; color: inherit !important; color: $textColor;}  
    }
 
 
