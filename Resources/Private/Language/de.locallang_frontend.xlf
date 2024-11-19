@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-22T11:44:12Z" product-name="hda_personen">
+		<header/>
+		<body>
+		 
+            <trans-unit id="educationalarea.1">
+                <source>Educational Area</source>
+                <target state="translated">Lehrgebiet</target>
+            </trans-unit>   
+            <trans-unit id="educationalarea.2">
+                <source>Workspace</source>
+                <target state="translated">Arbeitsbereich</target>
+            </trans-unit>               
+            <trans-unit id="educationalarea.3">
+                <source>Area of responsibility</source>
+                <target state="translated">Aufgabengebiet</target>
+            </trans-unit>
+            	
+			<trans-unit id="consultation">
+				<source>Consultation</source>
+				<target state="translated">Sprechstunde</target>
+			</trans-unit>
+			<trans-unit id="roles">
+				<source>Other functions</source>
+				<target state="translated">Weitere Funktionen</target>
+			</trans-unit>
+
+			<trans-unit id="office">
+				<source>Office</source>
+				<target state="translated">Büro</target>
+			</trans-unit>
+			<trans-unit id="personal">
+				<source>Personal web page</source>
+				<target state="translated">Details zur Person</target>
+			</trans-unit>	
+			<trans-unit id="profil">
+				<source>Short profile</source>
+				<target state="translated">Details zur Person</target>
+			</trans-unit>	
+			<trans-unit id="ownsite">
+				<source>Own website</source>
+				<target state="translated">Eigene Webseite</target>
+			</trans-unit>			
+			<trans-unit id="communication">
+				<source>Communication</source>
+				<target state="translated">Kommunikation</target>
+			</trans-unit>	
+			<trans-unit id="noentries">
+				<source>No entries available.</source>
+				<target state="translated">Keine Einträge.</target>
+			</trans-unit>	
+			<trans-unit id="search">
+				<source>Search</source>
+				<target state="translated">Suche</target>
+			</trans-unit>				
+			<trans-unit id="reset">
+				<source>Reset</source>
+				<target state="translated">Zurücksetzen</target>
+			</trans-unit>				
+			<trans-unit id="submit">
+				<source>submit</source>
+				<target state="translated">Absenden</target>
+			</trans-unit>				
+			<trans-unit id="all">
+				<source>All</source>
+				<target state="translated">Alles</target>
+			</trans-unit>
+			
+		</body>		
+	</file>
+</xliff>			

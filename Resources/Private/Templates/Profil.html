@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:hda="http://typo3.org/ns/Hda/HdaPersonen/ViewHelpers">
+
+		<div class="d-flex profilElement">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-12 col-md-5 infoFrame">
+						<f:render partial="Information.html" section="single"     arguments="{person: person,settings:settings,iterator:iterator}" />
+					</div>	
+					<div class="col-8  col-md-4 contactFrame">
+						<f:render partial="Contact.html"     section="single"     arguments="{person: person,settings:settings,iterator:iterator}" />
+					</div>
+					<div class="col-4 col-md-3 imageFrame pr-0 pr-md-3">
+						<f:render partial="Image.html"       section="single"     arguments="{person: person,settings: settings,iterator: iterator}" />
+					</div>
+				</div>		
+				<div class="row">				
+					<div class="col-12 profilFrame pt-1 mt-md3">
+                        <f:render partial="Information.html" section="profil"     arguments="{person: person,settings:settings,iterator:iterator}" />
+                     </div>  
+				</div>	
+			</div>	
+		</div>
+</html>

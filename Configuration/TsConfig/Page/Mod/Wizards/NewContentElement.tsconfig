@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+	elements {
+		person {
+			iconIdentifier = hda_personen
+			title = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:title
+			description = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:description
+			tt_content_defValues {
+				CType = list
+				list_type = hdapersonen_person
+			}
+		}
+	}
+}

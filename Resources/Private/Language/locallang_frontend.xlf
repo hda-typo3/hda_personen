@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-22T11:44:12Z" product-name="hda_personen">
+		<header/>
+		<body>
+		
+			<trans-unit id="educationalarea.1">
+				<source>Educational Area</source>
+			</trans-unit>	
+			<trans-unit id="educationalarea.2">
+				<source>Workspace</source>
+			</trans-unit>				
+            <trans-unit id="educationalarea.3">
+                <source>Area of responsibility</source>
+            </trans-unit>
+			<trans-unit id="consultation">
+				<source>Consultation</source>
+			</trans-unit>
+			<trans-unit id="roles">
+				<source>Other functions</source>
+			</trans-unit>
+
+			<trans-unit id="office">
+				<source>Office</source>
+			</trans-unit>
+			<trans-unit id="personal">
+				<source>Personal web page</source>
+			</trans-unit>	
+			<trans-unit id="profil">
+				<source>Short profile</source>
+			</trans-unit>	
+			<trans-unit id="ownsite">
+				<source>Own website</source>
+			</trans-unit>			
+			<trans-unit id="communication">
+				<source>Communication</source>
+			</trans-unit>	
+			<trans-unit id="noentries">
+				<source>No entries available.</source>
+			</trans-unit>				
+			<trans-unit id="orcid">
+				<source>ORCID</source>
+			</trans-unit>		
+			<trans-unit id="search">
+				<source>Search</source>
+			</trans-unit>		
+			<trans-unit id="reset">
+				<source>reset</source>
+			</trans-unit>		
+			<trans-unit id="submit">
+				<source>submit</source>
+			</trans-unit>		
+			<trans-unit id="all">
+				<source>All</source>
+			</trans-unit>		
+							
+		</body>		
+	</file>
+</xliff>			
