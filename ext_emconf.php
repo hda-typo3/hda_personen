@@ -16,11 +16,13 @@ $EM_CONF[$_EXTKEY] = array(
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '12.0.01',
+	'version' => '11.0.03',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '12.4',
-		    't3up' => '12',
+			'typo3' => '11.5',
+		    't3up' => '11',
+		    'ods_osm' => '',
+		    'ig_ldap_sso_auth' => '',
 		),
 		'conflicts' => array(
 		),
