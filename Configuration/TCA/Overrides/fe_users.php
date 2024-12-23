@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') || die('Access denied.');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';
 
