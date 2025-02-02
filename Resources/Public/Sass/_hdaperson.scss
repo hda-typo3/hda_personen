@@ -1,0 +1,112 @@
+@import '../../../../../t3ac/t3up/Resources/Public/Sass/_mixin.scss';
+
+.person{                                       
+    span                                            {display: block;}
+    span span                                       {display: inline;}   
+    
+     ul li                                          {margin-bottom: 0;}  
+     
+    .imageformat.normal                             {aspect-ratio: 4 / 3; overflow: hidden}
+    .imageformat.wide                               {aspect-ratio: 16 / 9; overflow: hidden}
+    .imageformat.portrait                           {aspect-ratio: 4 / 5; overflow: hidden}
+    .imageformat.square                             {aspect-ratio: 1 / 1; overflow: hidden}
+    .imageformat                                    {display: flex; justify-content: center; align-items: center; overflow: hidden}
+    .imageformat  img                               {
+                                                    min-height: inherit !important;
+                                                    width: inherit !important; 
+                                                    height: inherit !important;
+                                                    } 
+                                                    
+    &.inline .personInfo                            {width: calc(100% - #{$v2}); position: absolute; top: 70%; left: 0; @include mx1; z-index: 2;}   
+                                                                           
+}
+
+/* Profil **************************************** */
+
+.profil{                                            
+    > *                                             {flex: 0 0 auto; width: 100%;}                                 
+
+}
+
+
+@media screen and (min-width:  768px){
+    .profil{                                            
+        > .profilInfo                               {width: 50%; @include pe075}                                 
+        > .profilImage                              {width: 50%; @include ps075}
+    }
+}
+
+
+
+@media screen and (min-width:  768px){
+    .profil{                                            
+        > .profilInfo                               {width: 50%; @include pe075}                                 
+        > .profilImage                              {width: 50%; @include ps075}
+    }
+}
+
+
+@media screen and (min-width:  1200px){
+    .profil{                                            
+        > .profilInfo                               {width: 25%; @include pe075}                                 
+        > .profilImage                              {width: 25%; @include ps075}
+        > .profilText                               {width: 50%; @include px075}
+        
+    .imageformat  img                               {
+                                                    width: 100% !important; 
+                                                    height: auto !important;
+                                                    } 
+                                                    
+    }
+}
+
+
+/* Compact *************************************** */
+.compact { 
+
+    > div                                           {display: flex; flex-wrap: wrap; width: 100%;}
+    > div > div                                     {flex: 0 0 auto;}  
+    
+    .spacing1 > div                                 {@include mx025}
+    .spacing2 > div                                 {@include mx033}
+    .spacing3 > div                                 {@include mx050}
+    .spacing4 > div                                 {@include mx066}
+    .spacing5 > div                                 {@include mx075}
+    .spacing6 > div                                 {@include mx1}
+    
+     /* 1 */          
+    
+     .itemsInRow1 > div                             {width: 100%; overflow: hidden; @include mx0; }
+     
+     /* 2 */         
+     .itemsInRow2 > div                             {width: $c50; overflow: hidden;}
+     .itemsInRow2.spacing1 > div                    {width: calc(#{$c50} - #{$v025});}
+     .itemsInRow2.spacing2 > div                    {width: calc(#{$c50} - #{$v033});}
+     .itemsInRow2.spacing3 > div                    {width: calc(#{$c50} - #{$v050});}
+     .itemsInRow2.spacing4 > div                    {width: calc(#{$c50} - #{$v066});}
+     .itemsInRow2.spacing5 > div                    {width: calc(#{$c50} - #{$v075});}
+     .itemsInRow2.spacing6 > div                    {width: calc(#{$c50} - #{$v1});}
+     
+     .itemsInRow2 > div:nth-of-type(2n)             {@include me0;}   
+     .itemsInRow2 > div:nth-of-type(2n-1)           {@include ms0;}   
+     
+     
+     /* 3 */
+     .itemsInRow3 > div                             {width: $c33; overflow: hidden}
+     .itemsInRow3.spacing1 > div                    {width: calc(#{$c33} - #{$v033});}
+     .itemsInRow3.spacing2 > div                    {width: calc(#{$c33} - #{$v050});}
+     .itemsInRow3.spacing3 > div                    {width: calc(#{$c33} - #{$v070});}
+     .itemsInRow3.spacing4 > div                    {width: calc(#{$c33} - #{$v090});}
+     .itemsInRow3.spacing5 > div                    {width: calc(#{$c33} - #{$v1});}
+     .itemsInRow3.spacing6 > div                    {width: calc(#{$c33} - #{$v135});}
+     
+     .itemsInRow3 > div:nth-of-type(3n)             {@include me0;}   
+     .itemsInRow3 > div:nth-of-type(3n-2)           {@include ms0;}   
+     
+     .itemsInRow4 > div                             {width: $c25; overflow: hidden}
+     
+     .personInfo                                    {@include p075;}
+     
+}
+
+

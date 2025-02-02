@@ -30,9 +30,9 @@ plugin.tx_hdapersonen {
 }
 
 page.includeCSS{
-   	hdaperson                          		=  EXT:hda_personen/Resources/Public/Sass/_hdapersonen.scss
-    hdaperson.linenumber                     = true    
-	hdaperson.outputStyle                    =  compressed 
+   	hdaperson                          		=  EXT:hda_personen/Resources/Public/Sass/_hdaperson.scss
+    hdaperson.linenumber                    = true    
+	hdaperson.outputStyle                  =  compressed 
 }
 
 //config.tx_extbase < plugin.tx_hdapersonen

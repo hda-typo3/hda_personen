@@ -1,50 +1,322 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Hda\HdaPersonen\Domain\Repository;
 
+use Hda\HdaPersonen\Domain\Model\Person;
 use Hda\HdaPersonen\Domain\Model\Dto\SearchFormDto;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Hda\HdaPersonen\Domain\Repository\PersonRepository;
 
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2024 Hochschule Darmstadt
- *  All rights reserved
- ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
- * The repository for Persons
+ * @extends Repository<Person>
  */
-class PersonRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class PersonRepository extends Repository 
+{
 
-    public function initializeObject () 
-    {
-        /** @var $defaultQuerySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-        $defaultQuerySettings->setRespectStoragePage(false);
-        $defaultQuerySettings->setRespectSysLanguage(false);
-    }
+   // protected $defaultOrderings = ['name' => QueryInterface::ORDER_ASCENDING];
+    
+
+        //   \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($department);
+    
     
     /**
-     * @param array $startingpoints
-     * @return mixed
+    * Select persons from the individual list of "Persons"
      */
-    public function findPersonen($startingpoints) 
-    {
-        $query = $this->createQuery();     
+    public function findPersons(
+        array $setting,
+        $constraints = []
+        ): QueryResultInterface
+        {
+        $sort                   = $setting['sort'];
+        $allperson              = explode (',',$setting['allpersons']);
+        
+    
+        $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setRespectSysLanguage(false);
-        $query = $query->matching(
-            $query->logicalAnd(
-                $query->equals('pid', $startingpoints),
-                $query->logicalNot($query->equals ('employed',''))
-            )
-        );
+                
+        foreach ($allperson as $person) {
+            $constraints[] = $query->equals('uid', $person);
+        }
+
+        if ($sort == '1' ){
+            $query->setOrderings([
+                'name' => QueryInterface::ORDER_ASCENDING,
+                'uid' => QueryInterface::ORDER_ASCENDING,
+            ]);
+        }
+        
+        if (count($constraints)) {
+            $query->matching($query->logicalOr(...array_values($constraints)));
+        }
+        
         return $query->execute();
     }
     
+    
+    /**
+     * Select persons from the "Employed"
+     */
+    public function findEmployeds(
+        array $setting,
+        $constraints = []
+        ): QueryResultInterface
+        {
+            $asc                = $setting['asc'];
+            $sort               = $setting['sortby'];
+            $employed           = explode (',', $setting['allemployeds']); 
+            $startingpoints     = explode (',',$setting['pages']);
+            $department         = $setting['alldepartments'];            
+            $alldepartment      = explode (',',$setting['alldepartments']);
+            
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->getQuerySettings()->setRespectSysLanguage(false);
+                        
+            if ($department != '') {
+                $constraints[] = $query->in('pid', $startingpoints);
+                $constraints[] = $query->in('employed', $employed);
+                $constraints[] = $query->equals('company',$alldepartment);
+            } else {
+                $constraints[] = $query->in('pid', $startingpoints);
+                $constraints[] = $query->in('employed', $employed);
+            }
+            
+            if (count($constraints)) {
+                $query->matching($query->logicalAnd(...array_values($constraints)));
+            }
+            
+            
+            if ($sort == 'name' ){            
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                                          'uid' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                                          'uid' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            if ($sort == 'uid' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING]);
+                }
+            }
+            if ($sort == 'employed' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                                         'name' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                                          'name' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            if ($sort == 'company' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                                          'name' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                                         'name' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            
+            return $query->execute();
+    }
+    
+    /**
+     * Select persons from the "Roles"
+     */
+    public function findRoles(
+        array $setting,
+        $constraints = []
+        ): QueryResultInterface
+        {
+            $startingpoints     = explode (',',$setting['pages']);
+            $role 		        = $setting['allroles'];
+            $department         = $setting['alldepartments'];
+            $asc                = $setting['asc'];
+            $sort               = $setting['sortby'];
+            $alldepartment      = explode (',',$setting['alldepartments']);             
+            
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->getQuerySettings()->setRespectSysLanguage(false);
+                        
+            $constraints[] = $query->equals('company', $department);
+            $constraints[] = $query->like('roles', '%' . $role . '%');
+
+            if ($sort == 'name' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                        'uid' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                        'uid' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            if ($sort == 'uid' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING]);
+                }
+            }
+            if ($sort == 'employed' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                        'name' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                        'name' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            if ($sort == 'company' ){
+                if ($asc == '1' ){
+                    $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                        'name' => QueryInterface::ORDER_ASCENDING]);
+                } else {
+                    $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                        'name' => QueryInterface::ORDER_ASCENDING]);
+                }
+            }
+            
+            if (count($constraints)) {
+                $query->matching($query->logicalAnd(...array_values($constraints)));
+            }
+            return $query->execute();
+    }
+    
+    /**
+     * Select persons from the "Departments"
+     */
+    
+    public function findDepartments(
+        array $setting,
+        $constraints = []
+        ): QueryResultInterface
+        {
+        
+        $startingpoints     = explode (',',$setting['pages']);
+        $alldepartment      = explode (',',$setting['alldepartments']);
+        $asc                = $setting['asc'];
+        $sort               = $setting['sortby'];
+        
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setRespectSysLanguage(false);
+        
+        
+        $constraints = $this->generateSearchFormConstraints($searchFormDto, $query);
+        
+        $constraints[] = $query->in('pid', $startingpoints);
+        $constraints[] = $query->in('company',$alldepartment);
+
+        if (count($constraints)) {
+            $query->matching($query->logicalAnd(...array_values($constraints)));
+        }
+        
+        if ($sort == 'name' ){
+            if ($asc == '1' ){
+                $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                    'uid' => QueryInterface::ORDER_ASCENDING]);
+            } else {
+                $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                    'uid' => QueryInterface::ORDER_ASCENDING]);
+            }
+        }
+        if ($sort == 'uid' ){
+            if ($asc == '1' ){
+                $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING]);
+            } else {
+                $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING]);
+            }
+        }
+        if ($sort == 'employed' ){
+            if ($asc == '1' ){
+                $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                    'name' => QueryInterface::ORDER_ASCENDING]);
+            } else {
+                $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                    'name' => QueryInterface::ORDER_ASCENDING]);
+            }
+        }
+        if ($sort == 'company' ){
+            if ($asc == '1' ){
+                $query->setOrderings([$sort => QueryInterface::ORDER_ASCENDING,
+                    'name' => QueryInterface::ORDER_ASCENDING]);
+            } else {
+                $query->setOrderings([$sort => QueryInterface::ORDER_DESCENDING,
+                    'name' => QueryInterface::ORDER_ASCENDING]);
+            }
+        }
+        return $query->execute();
+        
+    }
+    
+    
+    /**
+     * Select profil of a "Persons"
+     */
+    public function findProfil(
+        array $setting,
+        $constraints = []
+        ): QueryResultInterface
+        {
+            $allperson              = explode (',',$setting['allpersons']);
+            
+            $query = $this->createQuery();
+            $query->getQuerySettings()->setRespectStoragePage(false);
+            $query->getQuerySettings()->setRespectSysLanguage(false);
+            
+            foreach ($allperson as $person) {
+                $constraints[] = $query->equals('uid', $person);
+            }
+                        
+            if (count($constraints)) {
+                $query->matching($query->logicalOr(...array_values($constraints)));
+            }
+            
+            return $query->execute();
+    }
+    
+    
+
+    /**
+     * @param array $startingpoint
+     * @return mixed
+     */
+    public function findPersonsWithoutExtbase(int $startingpoint)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('fe_users');
+        $result = $queryBuilder
+            ->select('*')
+            ->from('fe_users')
+            ->where(
+                $queryBuilder->expr()->and(
+                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($startingpoint, \PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('Tx_Extbase_Domain_Model_FrontendUser', Connection::PARAM_STR)),
+                    $queryBuilder->expr()->neq('employed', $queryBuilder->createNamedParameter('', Connection::PARAM_STR))
+                )
+            )
+            ->executeQuery()
+            ->fetchAll();
+        return $result;
+    }
+        
+        
+    /**
+     * Searchform
+     */
     private function generateSearchFormConstraints (SearchFormDto $searchFormDto = null, $query) 
     {
         $constraints = [];
@@ -122,194 +394,17 @@ class PersonRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     }
     
     
-    /**
-     * Select persons from the "Individual selection"
-     * @param array $settings
-     * @param SearchFormDto $searchFormDto
-     * @return mixed
-     */
-    public function findPersons($settings, SearchFormDto $searchFormDto = null)
-    {
-        $sort = $settings['sort'];
-        $allpersons = $settings['allpersons'];
-        $allpersonArray = explode (',', $allpersons);
-				
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(false);
-        $query->getQuerySettings()->setRespectSysLanguage(false);
-
-        $constraints = $this->generateSearchFormConstraints($searchFormDto, $query);
-        $search = [];
-        foreach ($allpersonArray as $person) {
-            $search[] = $query->equals('uid', $person);
-        }
-        
-        $constraints[] = $query->logicalOr($search);
-        
-        $query = $query->matching(
-            $query->logicalAnd($constraints)
-        );
-        
-        /*
-        $typo3DbQueryParser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser::class);
-        $queryBuilder = $typo3DbQueryParser->convertQueryToDoctrineQueryBuilder($query);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($queryBuilder->getSQL());
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($queryBuilder->getParameters());
-        */
-        
-        $result = $query->execute();
-    
-        // sorting with the flag in the flexform
-        if ($sort) {
-           $query->setOrderings(array('name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-        }
-        
-        return $result;
-    }
-
-
-     /**
-     * Select persons from the "Employed"
-     * @param array $settings
-     * @param SearchFormDto $searchFormDto
-     * @return mixed
-     */
-    public function findEmployeds($settings, SearchFormDto $searchFormDto = null)
-    {
-         $department   = $settings['alldepartments'];
-         $allemployeds = $settings['allemployeds'];
-		
-		 // build the query
-         $startingpoints = explode(',',$settings['pages']);    
-         $query = $this->createQuery();
-         $query->getQuerySettings()->setRespectStoragePage(false);
-         $query->getQuerySettings()->setRespectSysLanguage(false);
-         $allemployedsArray = explode (',', $allemployeds);
-         
-         $constraints = $this->generateSearchFormConstraints($searchFormDto, $query);
-         
-         if ($department != '') {
-             $constraints[] = $query->in('pid', $startingpoints);
-             $constraints[] = $query->in('employed', $allemployedsArray);
-             $constraints[] = $query->equals('company',$department);
-         } else {
-             $constraints[] = $query->in('pid', $startingpoints);
-             $constraints[] = $query->in('employed', $allemployedsArray);
-         }
-         
-         $query = $query->matching(
-             $query->logicalAnd($constraints)
-         );
-		 
-         $result = $query->execute();
-         // name sorting
-         $query->setOrderings(array('name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-         // is result not empty
-         $number = $query->count();
-
-         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($number);
-         
-         if ($number != 0){
-             return $result;
-         }
-         return;    
-     }
      
-     /**
-      * Select persons from the "Roles"
-      * @param array $settings
-      * @param SearchFormDto $searchFormDto
-      * @return mixed
-      */
-     public function findRoles($settings, SearchFormDto $searchFormDto = null)
-     {
-         
-         $role 		= $settings['allroles'];
-         $department = $settings['alldepartments'];
-         
-       //   \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($department);  
-         
-         $query = $this->createQuery();
-         $query->getQuerySettings()->setRespectStoragePage(false);
-         $query->getQuerySettings()->setRespectSysLanguage(false);
-         
-         $constraints = $this->generateSearchFormConstraints($searchFormDto, $query);
-         
-         if ($department != '') {
-             $constraints[] = $query->equals('company', $department);
-             $constraints[] = $query->like('roles', '%' . $role . '%');
-             $query = $query->matching(
-                 $query->logicalAnd($constraints)
-             );
-         } else {
-             
-             $startingpoints = explode(',', $settings['pages']);
-             $search = [];
-             foreach ($startingpoints as $startingpoint) {
-                 $search[] = $query->equals('pid', $startingpoint);
-             }
-             $constraints[] = $query->like('roles', '%' . $role . '%');
-             $constraints[] = $query->logicalOr($search);
-         }
-         
-         $query = $query->matching(
-             $query->logicalAnd($constraints)
-         );
-         
-         $result = $query->execute();
-         // name sorting
-         $query->setOrderings(array('name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-         // is result not empty
-         $number = $query->count();
-         if ($number != 0) {
-             return $result;
-         }
-         return;
-     }
+
      
      
-     /**
-      * Select persons from the "Departments"
-      * @param array $settings
-      * @param SearchFormDto $searchFormDto
-      * @return mixed
-      */
-    
-     public function findDepartments($settings, SearchFormDto $searchFormDto = null)
-     {
-         
-         $role 		  = $settings['allroles'];
-         $employed    = $settings['allemployeds'];
-         $department  = $settings['alldepartments'];;
-         
-         $query = $this->createQuery();
-         $query->getQuerySettings()->setRespectStoragePage(false);
-         $query->getQuerySettings()->setRespectSysLanguage(false);
-         
-         $startingpoints = explode(',', $settings['pages']);
-         $search = [];
-         foreach ($startingpoints as $startingpoint) {
-             $search[] = $query->equals('pid', $startingpoint);
-         }
-         
-         $constraints = $this->generateSearchFormConstraints($searchFormDto, $query);
-         $constraints[] = $query->like('company', '%' . $department . '%');
-         $constraints[] = $query->logicalOr($search);
-                  
-         if (($role == '') && ($employed == '')) {
-             $query = $query->matching(
-                 $query->logicalAnd($constraints)
-             );             
-         }
-         
-         $result = $query->execute();
-         $query->setOrderings(array('name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
-         // is result not empty
-         $number = $query->count();
-         if ($number != 0){
-             return $result;
-         }
-         return;
-     }
+     
+     
+     
+     
+     
+     
+
+     
 
 }

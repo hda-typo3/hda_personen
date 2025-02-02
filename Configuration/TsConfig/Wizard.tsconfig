@@ -1,0 +1,38 @@
+################################
+#### CONTENT ELEMENT WIZARD ####
+################################
+
+mod.wizards.newContentElement.wizardItems.plugins {
+    elements {
+        person {
+            iconIdentifier = hdapersonen_index
+            title = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:title
+            description = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:description
+            tt_content_defValues {
+                CType = list
+                list_type = hdapersonen_index
+            }
+        }
+        search {
+            iconIdentifier = hdapersonen_search
+            title = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:titlesearch
+            description = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:descriptionsearch
+            tt_content_defValues {
+                CType = list
+                list_type = hdapersonen_search
+            }
+        }
+        profil {
+            iconIdentifier = hdapersonen_profil
+            title = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:titleprofil
+            description = LLL:EXT:hda_personen/Resources/Private/Language/locallang_backend.xlf:descriptionprofil
+            tt_content_defValues {
+                CType = list
+                list_type = hdapersonen_profil
+            }
+        }
+    }
+    
+    show := addToList(hdapersonen_index,hdapersonen_search,hdapersonen_profil)
+
+}

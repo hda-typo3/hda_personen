@@ -4,28 +4,29 @@ declare(strict_types=1);
 
 namespace Hda\HdaPersonen\Domain\Model\Dto;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
- * This file is part of the "Personen Plugin" Extension for TYPO3 CMS.
+ * This file is part of the "T3md\Measure" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2023 Georg Ringer
+ * (c) 2024 Georg Ringer
  */
 
 /**
- * Person
+ * Hda\HdaPersonen
  */
-class SearchFormDto extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class SearchFormDto extends AbstractEntity
 {
 
     /** @var string */
     protected $searchWord = '';
-
-    /** @var string */
-    protected $firstChar = '';
-
+    
+    /** @var int */
+    protected $company= '';
+    
     /**
      * @return string
      */
@@ -42,29 +43,32 @@ class SearchFormDto extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->searchWord = $searchWord;
         return $this;
-    }
-
+    }  
+    
+    
+    
     /**
-     * @return string
+     * @return int
      */
-    public function getFirstChar(): string
+    public function getCompany(): int
     {
-        return $this->firstChar;
+        return $this->company;
     }
-
+    
     /**
-     * @param string $firstChar
+     * @param int $company
      * @return SearchFormDto
      */
-    public function setFirstChar(string $firstChar): SearchFormDto
+    public function setCompany(int $company): SearchFormDto
     {
-        $this->firstChar = $firstChar;
+        $this->company = $ccompany;
         return $this;
     }
 
+   
     public function isEmpty(): bool
     {
-        return empty($this->searchWord) && empty($this->firstChar);
+        return empty($this->searchWord) && empty($this->company);
     }
 
 }

@@ -1,1 +1,1 @@
-https://sd.h-da.de/cgi-bin/getinfo.cgi?what=xml-rollen
+Den Text Rollen.xml auf fileadmin/System kopieren

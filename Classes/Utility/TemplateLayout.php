@@ -17,21 +17,25 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class TemplateLayout implements SingletonInterface
 {
-
     /**
      * Get available template layouts for a certain page
      *
      * @param int $pageUid
-     * @return array
      */
-    public function getAvailableTemplateLayouts($pageUid)
+    public function getAvailableTemplateLayouts($pageUid): array
     {
         $templateLayouts = [];
 
+        // Check if the layouts are extended by ext_tables
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'])
+            && is_array($GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'])
+        ) {
+            $templateLayouts = $GLOBALS['TYPO3_CONF_VARS']['EXT']['news']['templateLayouts'];
+        }
 
         // Add TsConfig values
         foreach ($this->getTemplateLayoutsFromTsConfig($pageUid) as $templateKey => $title) {
-            if (GeneralUtility::isFirstPartOfStr($title, '--div--')) {
+            if (is_string($title) && str_starts_with($title, '--div--')) {
                 $optGroupParts = GeneralUtility::trimExplode(',', $title, true, 2);
                 $title = $optGroupParts[1];
                 $templateKey = $optGroupParts[0];
@@ -41,6 +45,7 @@ class TemplateLayout implements SingletonInterface
 
         return $templateLayouts;
     }
+
 
     /**
      * Get template layouts defined in TsConfig

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+    <sheets>
+    <sDEF>
+        <ROOT>
+            <sheetTitle>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:sheet_person</sheetTitle>
+            <type>array</type>
+            <el>
+                <settings.pages>
+                    <TCEforms>
+                        <exclude>0</exclude>
+                        <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:startingpoint</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>3</size>
+                            <maxitems>10</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                    </TCEforms>
+                </settings.pages>
+                
+                <settings.allpersons>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:person</label>
+                    <config>
+                        <type>select</type>
+                        <itemsProcFunc>Hda\HdaPersonen\Service\FlexFormService->person</itemsProcFunc>
+                        <renderType>selectMultipleSideBySide</renderType> 
+                        <items>
+                            <numIndex index="0">
+                                <label>---</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                    </config>
+                </settings.allpersons>
+            </el>
+        </ROOT>
+    </sDEF>
+    <sPERSON>
+        <ROOT>
+            <sheetTitle>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:sheet_personaldata</sheetTitle>
+            <type>array</type>
+            <el>          
+                
+                <settings.noname>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:noname</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                         <default>0</default>
+                    </config>
+                </settings.noname>
+                                
+                <settings.degree>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:degree</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.degree>
+                   
+                <settings.employed>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:employed</label>                  
+                    <config>                
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>0</default>
+                    </config>
+                </settings.employed>
+                          
+                <settings.department>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:department</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>0</default>
+                    </config>
+                </settings.department>
+
+                <settings.educationalarea>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:educationalarea</label>                                               
+                    <config>                
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>0</default>
+                    </config>
+                </settings.educationalarea>            
+
+
+                <settings.roles>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:roles</label>                 
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.roles>
+                
+                <settings.consultation>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:consultation</label>                  
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>0</default>
+                    </config>
+                </settings.consultation>
+
+                <settings.profil>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:profil</label>                    
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>0</default>
+                    </config>
+                </settings.profil>
+                      
+                <settings.subtitle>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:subtitle</label>
+                    <config>
+                        <type>input</type>
+                        <size>30</size>
+                    </config>
+                </settings.subtitle>
+            </el> 
+        </ROOT>
+    </sPERSON>
+    <sCONTACT>
+        <ROOT>
+            <sheetTitle>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:sheet_contactdata</sheetTitle>
+            <type>array</type>
+            <el>            
+                <settings.address>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:address</label>                           
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.address>         
+            
+                <settings.zip>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:zipcity</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.zip>
+                  
+                <settings.office>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:office</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.office>
+
+                <settings.telephone>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:telephone</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                        <default>1</default>
+                    </config>
+                </settings.telephone>
+                
+                <settings.telephone2>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:telephone2</label>
+                    <config>
+                        <type>input</type>
+                        <size>30</size>
+                    </config>
+                </settings.telephone2>  
+
+                <settings.emailformat>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:email</label>
+                    <config>
+                        <type>select</type>
+                        <renderType>selectSingle</renderType>
+                        <items>         
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:emailformat.none</label>
+                                <value>0</value>
+                            </numIndex>       
+                            <numIndex index="1" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:emailformat.classical</label>
+                                <value>1</value>
+                            </numIndex>
+                            <numIndex index="2" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:emailformat.name</label>
+                                <value>2</value>
+                            </numIndex>
+                            <numIndex index="3" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:emailformat.mailsymbol</label>
+                                <value>3</value>
+                            </numIndex>
+                        </items>
+                         <default>1</default>
+                    </config>
+                </settings.emailformat>
+                
+                <settings.ownemail>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:ownemail</label>
+                    <config>
+                        <type>input</type>
+                        <size>30</size>
+                    </config>
+                </settings.ownemail>
+
+                <settings.www>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:www</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                            <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                            <value></value>
+                            </numIndex>
+                        </items>
+                    </config>
+                </settings.www>
+                
+                 <settings.orcid>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:orcid</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                    </config>
+                </settings.orcid>
+                
+                <settings.image>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:image</label>
+                    <config>
+                        <type>check</type>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:show</label>
+                                <value></value>
+                            </numIndex>
+                        </items>
+                    </config>
+                </settings.image>     
+            </el>
+        </ROOT>
+    </sCONTACT>
+    <sDISPLAY>
+        <ROOT>
+            <sheetTitle>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:sheet_display</sheetTitle>
+            <type>array</type>
+            <el>
+                <settings.imageformat>
+                    <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat</label>
+                    <config>
+                        <type>select</type>
+                        <renderType>selectSingle</renderType>
+                        <items>
+                            <numIndex index="0" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat.1</label>
+                                <value>normal</value>
+                            </numIndex>
+                            <numIndex index="1" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat.2</label>
+                                <value>wide</value>
+                            </numIndex>  
+                            <numIndex index="2" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat.3</label>
+                                <value>portrait</value>
+                            </numIndex>                          
+                            <numIndex index="3" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat.4</label>
+                                <value>square</value>
+                            </numIndex>  
+                            <numIndex index="4" type="array">
+                                <label>LLL:EXT:hda_personen/Resources/Private/Language/locallang_flexform.xlf:imageformat.6</label>
+                                <value>none</value>
+                            </numIndex>  
+                        </items>
+                        <default>none</default>
+                    </config> 
+                </settings.imageformat>
+            </el>
+        </ROOT>
+    </sDISPLAY>    
+    
+    </sheets>
+</T3DataStructure>

@@ -56,9 +56,9 @@
                 <target state="translated">Breitengrad</target>
             </trans-unit>               
             
-            <trans-unit id="list">
-                <source>List view, three columns</source>
-                <target state="translated">Listenansicht 3-spaltig</target>
+            <trans-unit id="extend">
+                <source>Extended view</source>
+                <target state="translated">Erweiterte Listenansicht</target>
             </trans-unit>               
             <trans-unit id="compact">
                 <source>Compact view</source>

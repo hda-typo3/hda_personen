@@ -50,13 +50,24 @@
             
             <trans-unit id="title">
                 <source>Person-Plugin</source>
+            </trans-unit>    
+            <trans-unit id="titlesearch">
+                <source>Person-Plugin - Searchmodul</source>
             </trans-unit>               
+            <trans-unit id="titleprofil">
+                <source>Person-Plugin - Profilmodul</source>
+            </trans-unit>   
             <trans-unit id="description">
                 <source>Plugin to show personal data from the LDAP</source>
             </trans-unit>
-            
-            <trans-unit id="list">
-                <source>List view, three columns</source>
+            <trans-unit id="descriptionsearch">
+                <source>Plugin to show a Searchmodul for fe-users from the LDAP</source>
+            </trans-unit>
+            <trans-unit id="descriptionprofil">
+                <source>Plugin to show a profil for a selected fe-user of the LDAP</source>
+            </trans-unit>
+            <trans-unit id="extend">
+                <source>Extended view</source>
             </trans-unit>               
             <trans-unit id="compact">
                 <source>Compact view</source>

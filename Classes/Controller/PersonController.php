@@ -1,153 +1,180 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Hda\HdaPersonen\Controller;
 
+use Hda\HdaPersonen\Domain\Model\Person;
 use Hda\HdaPersonen\Domain\Model\Dto\SearchFormDto;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use Hda\HdaPersonen\Domain\Repository\PersonRepository;
+
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
-use \GeorgRinger\NumberedPagination\NumberedPagination;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 
-/**
- * PersonController
- */
-class PersonController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class PersonController extends ActionController
+{
+    protected PersonRepository $personRepository;
     
-    /**
-     * personRepository
-     *
-     * @var \Hda\HdaPersonen\Domain\Repository\PersonRepository
-     */
-    protected $personRepository;
-
-    /**
-     * @var \Hda\HdaPersonen\Domain\Repository\PageRepository
-     */
-    protected $pageRepository;
-    
-    /**
-     * @param \Hda\HdaPersonen\Domain\Repository\PersonRepository $personRepository
-     */
-    public function injectPersonenRepository(\Hda\HdaPersonen\Domain\Repository\PersonRepository $personRepository)
-    {
-        $this->personRepository = $personRepository;
+    public function __construct(
+        PersonRepository $personRepository
+    ){
+         $this->personRepository = $personRepository;
     }
     
-    /**
-     * @param \Hda\HdaPersonen\Domain\Repository\PageRepository $pageRepository
+    /*
      */
-    public function injectPageRepository(\Hda\HdaPersonen\Domain\Repository\PageRepository $pageRepository)
+    public function indexAction(): ResponseInterface
     {
-        $this->pageRepository = $pageRepository;
-    }
- 
-    /**
-     * action index
-     *
-     * @return string|object|null|void
-     */
-    public function indexAction(SearchFormDto $searchForm = null)
-    {
-        $searchForm = $searchForm ?? new SearchFormDto();
+                        
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($searchForm);   
         
         
-       // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($searchForm);
-
+        /* Template */
         $conf = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-
-        // error_reporting (E_ALL ^ E_NOTICE);
-        //selection from flexform        
-        $startingpoints = $this->settings['pages'];
-
-        if (isset($this->settings['itemPerPage'])){
-            $itemsPerPage = $this->settings['itemPerPage'];
-        } else {
-            $itemsPerPage = (int)1;
-        }
-        if (isset($this->settings['maximumLinks'])){
-            $maximumLinks= $this->settings['maximumLinks'];
-        } else {
-            $maximumLinks = (int)1;
-        }
-       
-        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
-
-        $isPerson   = '';
-        $isEmployed = '';
-        $isRole     = '';
-        $isDepartment = '';
-        
-        $isPerson = $this->settings['allpersons'];
-        $isEmployed = $this->settings['allemployeds'];
-        $isRole = $this->settings['allroles'];        
-        $isDepartment = $this->settings['alldepartments'];     
-                
         $templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($conf['view']['templateRootPath']);
         $template = $this->settings['templates'];
-         if ($template) {
-            $view = $templateRootPath . $template . '.html'; 
+        if ($template) {
+            $view = $templateRootPath . $template . '.html';
             $this->view->setTemplatePathAndFilename($view);
         }
-
+                
+        $isPerson = $this->settings['allpersons'];
+        $isEmployed = $this->settings['allemployeds'];
+        $isRole = $this->settings['allroles'];
+        $isDepartment = $this->settings['alldepartments'];   
+                
+       // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($isDepartment);       
+        
+        
+        /* settings */
+           $setting[] = '';
+           $setting['allemployeds']     = $this->settings['allemployeds'];
+           $setting['allpersons']       = $this->settings['allpersons'];
+           $setting['allroles']         = $this->settings['allroles'];
+           $setting['alldepartments']   = $this->settings['alldepartments'];
+           $setting['pages']            = $this->settings['pages'];
+           $setting                     = $this->settings['sort'];  
+           $setting                     = $this->settings['sortby'];             
+           
+          // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings['sort']);
+        
         //get the data from repository
         if ($isPerson != '') {
-            $allPersons = $this->personRepository->findPersons($this->settings);
-            $persons = $this->personRepository->findPersons($this->settings, $searchForm);
+            $persons = $this->personRepository->findPersons($this->settings);
         } elseif ($isEmployed != '') {
-            $allPersons = $this->personRepository->findEmployeds($this->settings);
-            $persons = $this->personRepository->findEmployeds($this->settings, $searchForm);
+            $persons = $this->personRepository->findEmployeds($this->settings);
         } elseif ($isRole != ''){
-            $allPersons = $this->personRepository->findRoles($this->settings);
-            $persons = $this->personRepository->findRoles($this->settings, $searchForm);
+           // print_r('nicht leer');
+            $persons = $this->personRepository->findRoles($this->settings);
         } elseif ($isDepartment != '') {
-            $allPersons = $this->personRepository->findDepartments($this->settings);
-            $persons = $this->personRepository->findDepartments($this->settings, $searchForm);
+           // print_r('nicht leer');
+            $persons = $this->personRepository->findDepartments($this->settings);
         } else {
             $persons = '';
         }
         
-        // better take the last name characters from the actually found persons according to plugin settings
-        $firstCharacters = [];
-        foreach ($allPersons as $person) {
-            $char = strtolower(substr(trim($person->getLastName()), 0, 1));
-            $char = str_replace(['ö', 'ä', 'ü'], ['o', 'a', 'u'], $char);
-            $firstCharacters[$char] = $char;
-        }
-        
-        /*
-        if ($searchForm->isEmpty()) {
-            $persons = $persons;
-        } else {
-            $persons = $this->personRepository->findSearchForm($searchForm, $startingpoints);
-            // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($persons);
-        }
-        */
-        if ($persons != ''){
-         $count = count($persons);
-        }
-        $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
-        
-        if ($persons != ''){
-            $paginator = new \TYPO3\CMS\Extbase\Pagination\QueryResultPaginator($persons, $currentPage, $itemsPerPage);
-            $pagination = new \GeorgRinger\NumberedPagination\NumberedPagination($paginator, $maximumLinks);
-            $this->view->assign('pagination', [
-                'paginator'     => $paginator,
-                'pagination'    => $pagination,
-            ]);
-        }
-        
-       //  \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(count($persons));
-        
-        
-        $this->view->assignMultiple([
-            // 'firstChars'    => $this->personRepository->getFirstChars(),
-            'firstChars'    => $firstCharacters,
-            'searchForm'    => $searchForm,
-            'itemsPerPage'  => $itemsPerPage,
-            'person'        => $persons  
-            
-       ]);
 
+        /* Pagination */        
+        if (isset($this->settings['itemPerPage']) && (int)$this->settings['paginate'] > 0){
+            $itemsPerPage = (int)$this->settings['itemPerPage'];
+        } else {
+            $itemsPerPage = (int)1000;
+        }
+        if (isset($this->settings['maximumLinks']) && (int)$this->settings['paginate'] > 0){
+            $maximumLinks = (int)$this->settings['maximumLinks'];
+        } else {
+            $maximumLinks = (int)1;
+        }
+        
+        
+        if($persons){
+            $count = count($persons);
+            
+            $currentPage = $this->request->hasArgument('currentPageNumber')
+            ? (int)$this->request->getArgument('currentPageNumber')
+            : 1;
+            
+            
+            $paginator = new QueryResultPaginator(
+                $persons,
+                $currentPage,
+                $itemsPerPage
+                );
+            
+            $pagination = new SlidingWindowPagination(
+                $paginator,
+                $maximumLinks,
+                );
+        }
+
+        if($count >= $itemsPerPage){
+        
+            $this->view->assignMultiple([
+                'count' => $count,
+                'pagination' => $pagination,
+                'paginator' => $paginator,
+                'currentPageNumber'  => $currentPage,
+            ]);
+        } else {
+              $this->view->assignMultiple([
+                  'paginator' => $paginator,
+              ]);              
+        }
+        
+        
+        
+        return $this->htmlResponse();
     }
+    
+    /*
+     * @IgnoreValidation("SearchFormDto)")
+     */
+    public function searchAction(): ResponseInterface
+    {
+        
+        return $this->htmlResponse();
+    }
+    
+    
+    /*
+     */
+    public function profilAction(): ResponseInterface
+    {
+        
+        $isPerson = $this->settings['allpersons'];
+        
+        /* settings */
+        $setting[] = '';
+        $setting['allpersons']       = $this->settings['allpersons'];
+        $setting['pages']            = $this->settings['pages'];
+        
+        // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->settings['sort']);
+        
+        //get the data from repository
+        if ($isPerson != '') {
+            $person = $this->personRepository->findProfil($this->settings);
+        }
+        
+        $count = count($person);
+               
+        $this->view->assignMultiple([
+            'count' => $count,
+            'person' => $person
+        ]);
+        
+        return $this->htmlResponse();
+    }
+
+    /*
+     */
+    public function showAction(): ResponseInterface
+    {
+        
+        return $this->htmlResponse();
+    }
+    
 }

@@ -1,24 +1,134 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:hda="http://typo3.org/ns/Hda/HdaPersonen/ViewHelpers">
 
-		<div class="d-flex profilElement">
-			<div class="col-12">
-				<div class="row">
-					<div class="col-12 col-md-5 infoFrame">
-						<f:render partial="Information.html" section="single"     arguments="{person: person,settings:settings,iterator:iterator}" />
-					</div>	
-					<div class="col-8  col-md-4 contactFrame">
-						<f:render partial="Contact.html"     section="single"     arguments="{person: person,settings:settings,iterator:iterator}" />
-					</div>
-					<div class="col-4 col-md-3 imageFrame pr-0 pr-md-3">
-						<f:render partial="Image.html"       section="single"     arguments="{person: person,settings: settings,iterator: iterator}" />
-					</div>
-				</div>		
-				<div class="row">				
-					<div class="col-12 profilFrame pt-1 mt-md3">
-                        <f:render partial="Information.html" section="profil"     arguments="{person: person,settings:settings,iterator:iterator}" />
-                     </div>  
-				</div>	
-			</div>	
-		</div>
+    <div class="d-flex person profil container flex-wrap">
+        <f:for each="{person}" as="person">
+            <f:if condition="{settings.image}">        
+	            <div class="profilImage order-1 order-md-2 order-xl-3 pb-7">
+	
+	                    <f:if condition="{person.imageref} != ''">
+	                       <div class="imageformat {settings.imageformat}">
+	                            <f:format.raw>
+	                                <hda:Image key="{person.imageref}" name="{person.name}"  settings="{settings}" />
+	                            </f:format.raw>
+	                        </div>
+	                    </f:if>
+
+	            </div>
+	        </f:if>	           
+	        <f:if condition="{settings.telephone} || {settings.mobil} || {settings.emailformat} || {settings.ownemail} || {settings.www} || {settings.orcid} || {settings.office} || {settings.educationalarea} ">
+	            <div class="profilInfo order-2 order-md-1 pb-7">
+	                <f:if condition="{settings.subtitle}"><f:format.htmlentitiesDecode><span class="subtitle">{settings.subtitle}</span></f:format.htmlentitiesDecode></f:if>
+	                <f:if condition="{settings.noname} = '0'">
+	                    <span class="person">
+	                        <f:if condition="{settings.degree} && {person.employed} != 'Funktionsaccount'">
+	                            <f:then>{person.title} {person.firstName} {person.lastName}</f:then>
+	                            <f:else>
+	                                <f:if condition="{person.employed} != 'Funktionsaccount'">
+	                                    {person.firstName} {person.lastName}
+	                                </f:if>
+	                                <f:if condition="{person.employed} == 'Funktionsaccount'">
+	                                    {person.name}
+	                                </f:if>
+	                            </f:else>
+	                        </f:if>
+	                    </span>
+	               </f:if>
+	                <f:if condition="{settings.department}">
+                        <f:if condition="{hda:EmptyField(key:'{person.department}')} != ''">                  
+	                       <span class="department">{person.department}</span>
+	                    </f:if>
+	                </f:if>
+	               <f:if condition="{settings.educationalarea}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.educationalarea}')} != ''">	               
+	                       <span class="educationalarea pb-5">{person.educationalarea}</span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.office}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.office}')} != ''">
+	                        <span><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:office" />: {person.office}</span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.address}">
+	                     <f:if condition="{hda:EmptyField(key:'{person.address}')} != ''">
+	                         <span>{person.address}</span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.zip}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.zip}')} != ''">
+	                        <span>{person.zip} {person.city}</span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.telephone}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
+	                        <span><a href="tel:{person.telephone}" class="link-phone">{person.telephone}</a></span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.telephone2}">
+	                    <span><a href="tel:{settings.telephone2}" class="link-phone">{settings.telephone2}</a></span>
+	                </f:if>
+	                <f:if condition="{settings.mobil}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.mobil}')} != ''">
+	                          <span><a href="tel:{person.mobil}" class="link-mobil">{person.mobil}</a></span>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.emailformat} >0">
+	                    <f:if condition="{hda:EmptyField(key:'{person.email}')} != ''">
+	                        <f:if condition="{settings.emailformat} == 1">
+	                             <span><f:link.email class="link-mail" email="{person.email}" /></span>
+	                        </f:if>
+	                        <f:if condition="{settings.emailformat} == 2">
+	                            <f:if condition="{person.employed} != 'Funktionsaccount'">
+	                                <f:then>
+	                                    <span><f:link.email class="link-mail" email="{person.email}">{person.firstName} {person.lastName}</f:link.email></span>
+	                                </f:then>
+	                                <f:else>
+	                                    <span><f:link.email class="link-mail" email="{person.email}">{person.name}</f:link.email></span>
+	                                </f:else>
+	                            </f:if>
+	                        </f:if>
+	                        <f:if condition="{settings.emailformat} == 3">
+	                             <span><f:link.email class="link-mail" email="{person.email}">E-Mail</f:link.email></span>
+	                        </f:if>
+	                    </f:if>
+	                </f:if>
+	                <f:if condition="{settings.ownemail}">
+	                      <span><f:link.email class="link-mail" email="{settings.ownemail}">{settings.ownemail}</f:link.email></span>
+	                </f:if>
+
+	                <f:if condition="{settings.www}">
+	                   <f:if condition="{hda:Website(www:'{person.www}')}">
+	                        <span><f:link.external class="link-web" uri="{person.www}" target="_blank"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:ownsite" /></f:link.external></span>
+	                   </f:if>
+	                 </f:if>
+	                <f:if condition="{settings.orcid}">
+	                    <f:if condition="{hda:EmptyField(key:'{person.orcid}')} != ''">
+	                        <span><f:link.external uri="https://orcid.org/{person.orcid}" target="_blank">{person.orcid}</f:link.external></span>
+	                    </f:if>
+	                </f:if>
+	               <f:if condition="{settings.consultation}">
+	                   <f:if condition="{hda:EmptyField(key:'{person.consultation}')} != ''">
+	                        <span class="consultation pt-5 "><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:consultation" /> 
+	                           <f:format.htmlentitiesDecode>{person.consultation}</f:format.htmlentitiesDecode>
+	                        </span>
+	                   </f:if>
+	               </f:if>
+	                <f:if condition="{settings.roles}">
+	                    <span class="roles pt-5"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:roles" /></span>
+	                     <f:if condition="{hda:EmptyField(key:'{person.roles}')} != ''">
+	                        <ul><f:format.htmlentitiesDecode><hda:Roles roles="{person.roles}" salutation="{person.salutation}"  /></f:format.htmlentitiesDecode></ul>
+	                    </f:if>
+	                </f:if>
+
+	            </div>
+	         </f:if>  
+	         <div class="profilText order-3 order-xl-2 pb-5">         
+	             <f:if condition="{settings.profil}">
+	                  <f:if condition="{hda:EmptyField(key:'{person.profil}')} != ''">                    
+	                         <f:format.raw>{person.profil}</f:format.raw>
+	                  </f:if>
+	             </f:if>
+            </div>	
+        </f:for>
+    </div>
 </html>

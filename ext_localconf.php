@@ -1,35 +1,55 @@
 <?php
+defined('TYPO3_MODE') || defined('TYPO3') || die('Access denied.');
 
-defined('TYPO3') || die('Access denied.');
-
+use Hda\HdaPersonen\Controller\PersonController;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 
 call_user_func(static function () {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    
+    // Update flexforms
+  //  $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'][\TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class]['flexParsing'][] = \Hda\HdaPersonen\Hooks\FlexFormHook::class;
+    
+    ExtensionUtility::configurePlugin(
         'HdaPersonen',
-        'Person',
+        'Index',
         [
-            \Hda\HdaPersonen\Controller\PersonController::class => 'index'
+            PersonController::class => 'index',
         ],
         // non-cacheable actions
         [
-            \Hda\HdaPersonen\Controller\PersonController::class => 'index'
+            PersonController::class => 'index',
         ]
-    );
+        );
     
-    /* ==  Add TSconfig ============================================ */
+    ExtensionUtility::configurePlugin(
+        'HdaPersonen',
+        'Search',
+        [
+            PersonController::class => 'search,show',
+        ],
+        // non-cacheable actions
+        [
+            PersonController::class => 'search,show',
+        ]
+        );
     
-    ExtensionManagementUtility::addTypoScriptSetup("@import 'EXT:hda_personen/Configuration/TypoScript/Mapping.typoscript'");
-    ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Page/Mod/Wizards/NewContentElement.tsconfig'");
-    ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Templates.tsconfig'");
-   
-     /* ==  register icons  ========================================= */
-	$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-	
-	$iconRegistry->registerIcon(
-	    'hda_personen',
-	    \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-	    ['source' => 'EXT:hda_personen/Resources/Public/Icons/hdaPersonen.svg']
-	    );
+    ExtensionUtility::configurePlugin(
+        'HdaPersonen',
+        'Profil',
+        [
+            PersonController::class => 'profil',
+        ],
+        // non-cacheable actions
+        [
+            PersonController::class => 'profil',
+        ]
+        );
+
+     ExtensionManagementUtility::addTypoScriptSetup("@import 'EXT:hda_personen/Configuration/TypoScript/Mapping.typoscript'");
+     ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Wizard.tsconfig'");
+     ExtensionManagementUtility::addPageTSConfig("@import 'EXT:hda_personen/Configuration/TsConfig/Templates.tsconfig'");
+    
 	
 });

@@ -1,0 +1,103 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true"
+      xmlns:hda="http://typo3.org/ns/Hda/HdaPersonen/ViewHelpers">
+    <div class="item position-relative">
+    
+        
+    <f:if condition="{settings.personal}">
+        <f:then>
+	        <f:link.page pageUid="{hda:Personalpage(key:'{person.email}')}">
+	                <f:render  section="compact" arguments="{person: person,settings:settings}" /> 
+	        </f:link.page>
+        </f:then>
+        <f:else>         
+ 	          <f:render  section="compact" arguments="{person: person,settings:settings}" />        
+        </f:else>        
+    </f:if>
+    
+        <f:section name="compact">
+	        <f:if condition="{settings.image}">        
+	               <f:if condition="{person.imageref} != ''">
+	                  <div class="imageformat {settings.imageformat}">
+	                       <f:format.raw>
+	                           <hda:Image key="{person.imageref}" name="{person.name}"  settings="{settings}" />
+	                       </f:format.raw>
+	                   </div>
+	               </f:if>
+	        </f:if>  
+	        <div class="personInfo">
+	        
+	    
+	             <f:if condition="{settings.subtitle}">
+	                <div class="subtitle">{person.subtitle}</div>
+	            </f:if>
+	       
+               <f:if condition="{settings.educationalarea}">
+                    <f:if condition="{hda:EmptyField(key:'{person.educationalarea}')} != ''">	               
+                       <div class="educationalarea">{person.educationalarea}</div>
+                    </f:if>
+                </f:if>	       
+	       
+	            <f:if condition="{settings.degree} && {person.employed} != 'Funktionsaccount'">
+	               <f:then><div class="h3 py-0 my-0">{person.title} {person.firstName} {person.lastName}</div></f:then>
+	               <f:else>
+	                   <f:if condition="{person.employed} != 'Funktionsaccount'">  
+	                       <div class="h3 py-0 my-0">{person.firstName} {person.lastName}</div>
+	                   </f:if>
+	                   <f:if condition="{person.employed} == 'Funktionsaccount'">  
+	                       <div class="h3 py-0 my-0">{person.name}</div>
+	                   </f:if>
+	               </f:else>
+	            </f:if>
+	           	
+	            <f:if condition="{settings.department}">
+	                <div class="department">{person.department}</div>
+	            </f:if>
+	
+	            <f:if condition="{settings.employed}">
+	                <div class="employed">{person.employed}</div>
+	            </f:if>
+	            
+                    <f:if condition="{settings.roles}">
+                        <div class="roles pt-5"><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:roles" /></div>
+                         <f:if condition="{hda:EmptyField(key:'{person.roles}')} != ''">
+                            <ul><f:format.htmlentitiesDecode><hda:Roles roles="{person.roles}" salutation="{person.salutation}"  /></f:format.htmlentitiesDecode></ul>
+                        </f:if>
+                    </f:if>
+
+	               <div class="admininstration">
+	                   <f:if condition="{settings.office}">
+	                        <f:if condition="{hda:EmptyField(key:'{person.office}')} != ''">
+	                            <span><f:translate key="LLL:EXT:hda_personen/Resources/Private/Language/locallang_frontend.xlf:office" />: {person.office}</span>
+	                        </f:if>
+	                    </f:if>
+	            
+                        <f:if condition="{settings.emailformat} >0">
+                        <f:if condition="{hda:EmptyField(key:'{person.email}')} != ''">
+                            <f:if condition="{settings.emailformat} == 1">
+                                 <span><f:link.email class="link-mail" email="{person.email}" /></span>
+                            </f:if>
+                            <f:if condition="{settings.emailformat} == 2">
+                                <f:if condition="{person.employed} != 'Funktionsaccount'">
+                                    <f:then>
+                                        <span><f:link.email class="link-mail" email="{person.email}">{person.firstName} {person.lastName}</f:link.email></span>
+                                    </f:then>
+                                    <f:else>
+                                        <span><f:link.email class="link-mail" email="{person.email}">{person.name}</f:link.email></span>
+                                    </f:else>
+                                </f:if>
+                            </f:if>
+                            <f:if condition="{settings.emailformat} == 3">
+                                 <span><f:link.email class="link-mail" email="{person.email}">E-Mail</f:link.email></span>
+                            </f:if>
+                        </f:if>
+                    </f:if>
+                    <f:if condition="{settings.telephone}">
+                        <f:if condition="{hda:EmptyField(key:'{person.telephone}')} != ''">
+                           <span>&nbsp;&#124;&nbsp;<a href="tel:{person.telephone}" class="link-phone">{person.telephone}</a></span>
+                        </f:if>
+                    </f:if>
+                </div>
+	        </div>
+        </f:section>
+    </div>
+</html>

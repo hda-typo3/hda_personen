@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3_MODE') || defined('TYPO3') || die('Access denied.');
 
 $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';
 
@@ -166,10 +166,10 @@ $feUsersColumns = [
 
 
 $fields 		= 'employed,roles,consultation,profil,educationalarea,imageref,orcid';
-$salutation 	= 'salutation';
+$salutation 		= 'salutation';
 $office 		= 'office';
 $mobil 			= 'mobil';
-$language 	    = '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource';
+$language 	    	= '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUsersColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
