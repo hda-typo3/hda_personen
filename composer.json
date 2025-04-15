@@ -19,8 +19,8 @@
       }
   },
   "require": {
-    "typo3/cms-core": "^12.4",
-    "t3ac/t3up": "^12.0"
+    "typo3/cms-core": "^13.4",
+    "t3ac/t3up": "^13"
   },
   "extra": {
     "typo3/cms": {
